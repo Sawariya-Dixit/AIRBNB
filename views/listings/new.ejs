@@ -1,0 +1,168 @@
+<% layout('/layouts/boilerplate') %>
+
+<style>
+  /* 🌸 Airbnb-Inspired Create Listing Page */
+  body {
+    background-color: #fff7f9; /* soft pastel pink bg */
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .create-listing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 1.5rem;
+  }
+
+  .create-listing-card {
+    width: 100%;
+    max-width: 650px;
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .create-listing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  }
+
+  .create-listing-card h3 {
+    text-align: center;
+    margin-bottom: 1.8rem;
+    color: #ff385c; /* Airbnb pink tone */
+    font-weight: 700;
+  }
+
+  label {
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .form-control {
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.15rem rgba(255, 56, 92, 0.25);
+  }
+
+  textarea {
+    resize: none;
+    height: 120px;
+  }
+
+  .add-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #ff385c, #e11d48);
+    border: none;
+    color: white;
+    padding: 0.9rem;
+    border-radius: 0.75rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    transition: 0.3s ease;
+  }
+
+  .add-btn:hover {
+    background: linear-gradient(90deg, #e11d48, #be123c);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(255, 56, 92, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .create-listing-card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+  }
+</style>
+
+<div class="create-listing-container">
+  <div class="create-listing-card">
+    <h3>Create a New Listing </h3>
+
+    <form
+      action="/listings"
+      method="post"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          name="listing[title]"
+          placeholder="Enter title"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          name="listing[description]"
+          placeholder="Write a short description..."
+          class="form-control"
+          required
+        ></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload Image</label>
+        <input
+          name="listing[image]"
+          type="file"
+          class="form-control"
+        />
+      </div>
+
+      <div class="row">
+        <div class="mb-3 col-md-4">
+          <label for="price" class="form-label">Price</label>
+          <input
+            name="listing[price]"
+            placeholder="Enter price"
+            type="number"
+            class="form-control"
+            required
+          />
+        </div>
+
+        <div class="mb-3 col-md-8">
+          <label for="country" class="form-label">Country</label>
+          <input
+            name="listing[country]"
+            placeholder="Enter country"
+            type="text"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          name="listing[location]"
+          placeholder="Enter location"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <button class="btn add-btn mt-3">Add Listing</button>
+    </form>
+  </div>
+</div>

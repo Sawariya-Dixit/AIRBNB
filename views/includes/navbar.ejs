@@ -1,0 +1,178 @@
+
+
+<style>
+  /* 🌈 Airbnb-Style Navbar */
+  .navbar {
+    background-color: #ffffff !important;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    font-family: "Poppins", sans-serif;
+    padding: 0.6rem 1rem;
+  }
+
+  .navbar-brand i {
+    color: #ff385c; /* Airbnb pink */
+  }
+
+  .nav-link {
+    color: #222 !important;
+    font-weight: 500;
+    margin-right: 0.6rem;
+    transition: color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    color: #ff385c !important;
+  }
+
+  /* 🔍 Search Bar */
+  .search-inp {
+    border: 1px solid #ddd;
+    border-radius: 25px !important;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    width: 220px;
+    transition: all 0.3s ease;
+  }
+
+  .search-inp:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 4px rgba(255, 56, 92, 0.4);
+    outline: none;
+  }
+
+  .search-btn {
+    background-color: #ff385c;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+  }
+
+  .search-btn:hover {
+    background-color: #e31c5f;
+  }
+
+  /* 🌐 Center Search Bar for screens > 768px */
+@media (min-width: 769px) {
+  .navbar-collapse {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Center search form properly */
+  .navbar-collapse > .mx-auto {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  #searchForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .search-inp {
+    width: 280px; /* responsive width */
+    max-width: 100%;
+  }
+}
+
+
+  /* 🧭 Responsive Adjustments */
+  @media (max-width: 768px) {
+    .search-inp {
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    .search-btn {
+      border-radius: 8px;
+      width: auto;
+      padding: 0 1rem;
+      height: 38px;
+    }
+
+    .navbar-nav .nav-link {
+      text-align: center;
+      margin-right: 0;
+    }
+
+    .navbar {
+      padding: 0.8rem;
+    }
+  }
+  
+</style>
+
+<nav class="navbar navbar-expand-md border-bottom sticky-top">
+  <div class="container-fluid">
+    <!-- 🌍 Brand + Toggler -->
+    <a class="navbar-brand" href="/listings">
+      <i class="fa-regular fa-compass fs-4"></i>
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- 🌐 Navbar Content -->
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <!-- Left Links -->
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- 🔍 Center Search -->
+      <div class="mx-auto my-2 my-md-0">
+        <form id="searchForm" action="/listings" method="GET" class="d-flex">
+          <input
+            type="text"
+            name="search"
+            id="searchInput"
+            class="form-control me-2 search-inp"
+            placeholder="Search destinations..."
+            value="<%= typeof search !== 'undefined' ? search : '' %>"
+          />
+          <button type="submit" class="btn search-btn">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- 👤 Right Auth Links -->
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Airbnb your home</a>
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } else { %>
+          <a class="nav-link" href="/logout"><b>Log out</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // 🚫 Prevent empty search
+  const searchForm = document.getElementById("searchForm");
+  const searchInput = document.getElementById("searchInput");
+  searchForm.addEventListener("submit", (e) => {
+    if (searchInput.value.trim() === "") e.preventDefault();
+  });
+</script>

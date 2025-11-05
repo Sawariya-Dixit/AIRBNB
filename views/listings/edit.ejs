@@ -1,0 +1,201 @@
+<% layout('/layouts/boilerplate') %>
+
+<style>
+  /* 🎨 Edit Listing Page - Clean Pastel Theme */
+  body {
+    background-color: #f9fafb; /* soft neutral background */
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .edit-listing-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90vh;
+    padding: 1.5rem;
+  }
+
+  .edit-listing-card {
+    width: 100%;
+    max-width: 650px;
+    background-color: #ffffff;
+    border-radius: 1.5rem;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .edit-listing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  }
+
+  .edit-listing-card h3 {
+    text-align: center;
+    margin-bottom: 1.8rem;
+    color: #ff385c; /* Airbnb pink-red tone */
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+
+  label {
+    font-weight: 600;
+    color: #374151;
+  }
+
+  .form-control {
+    border-radius: 0.75rem;
+    border: 1px solid #d1d5db;
+    padding: 0.75rem;
+    transition: all 0.2s ease;
+  }
+
+  .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 0 0.15rem rgba(255, 56, 92, 0.25);
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .listing-image {
+    display: block;
+    margin: 1rem auto;
+    border-radius: 0.75rem;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .update-btn {
+    width: 100%;
+    background: linear-gradient(90deg, #ff385c, #e11d48); /* pink to deep rose */
+    border: none;
+    color: white;
+    padding: 0.9rem;
+    border-radius: 0.75rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+  }
+
+  .update-btn:hover {
+    background: linear-gradient(90deg, #e11d48, #be123c);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(255, 56, 92, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .edit-listing-card {
+      padding: 1.5rem;
+      border-radius: 1rem;
+    }
+  }
+</style>
+
+<div class="edit-listing-container">
+  <div class="edit-listing-card">
+    <h3>Edit Your Listing </h3>
+
+    <form
+      method="POST"
+      action="/listings/<%= listing._id %>?_method=PUT"
+      novalidate
+      class="needs-validation"
+      enctype="multipart/form-data"
+    >
+      <!-- Title -->
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input
+          id="title"
+          name="listing[title]"
+          value="<%= listing.title %>"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <!-- Description -->
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea
+          id="description"
+          name="listing[description]"
+          class="form-control"
+          rows="4"
+          required
+        ><%= listing.description %></textarea>
+      </div>
+
+      <!-- Original Image -->
+      <div class="mb-3 text-center">
+        <p class="text-muted mb-2">Current Image Preview</p>
+        <img
+          src="<%= originalImageUrl %>"
+          alt="Listing Preview"
+          class="listing-image"
+          style="max-width: 250px; height: 200px;"
+        />
+      </div>
+
+      <!-- Upload New Image -->
+      <div class="mb-3">
+        <label for="image" class="form-label">Upload New Image</label>
+        <input
+          id="image"
+          name="listing[image]"
+          type="file"
+          class="form-control"
+        />
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input
+          id="price"
+          name="listing[price]"
+          value="<%= listing.price %>"
+          type="number"
+          min="0"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <!-- Country -->
+      <div class="mb-3">
+        <label for="country" class="form-label">Country</label>
+        <input
+          id="country"
+          name="listing[country]"
+          value="<%= listing.country %>"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <!-- Location -->
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input
+          id="location"
+          name="listing[location]"
+          value="<%= listing.location %>"
+          type="text"
+          class="form-control"
+          required
+        />
+      </div>
+
+      <!-- Submit -->
+      <button class="btn update-btn mt-3">Update Listing</button>
+    </form>
+  </div>
+</div>

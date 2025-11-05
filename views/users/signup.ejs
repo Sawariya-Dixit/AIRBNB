@@ -1,0 +1,156 @@
+<% layout('/layouts/boilerplate') %>
+
+<style>
+  /* 🌸 Signup Page (Clean + Responsive) */
+  body {
+    background-color: #fff7f9;
+    font-family: "Poppins", sans-serif;
+  }
+
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 5rem - 80px);
+    padding: 2rem 1rem;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 440px;
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    padding: 2.5rem 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-top: 4px solid #ff385c;
+  }
+
+  .auth-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+
+  .auth-card h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    color: #222;
+  }
+
+  .form-label {
+    font-weight: 500;
+    color: #555;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: #ff385c;
+    box-shadow: 0 0 6px rgba(255, 56, 92, 0.35);
+  }
+
+  .btn-auth {
+    width: 100%;
+    padding: 0.8rem;
+    font-weight: 600;
+    border-radius: 10px;
+    border: none;
+    background-color: #ff385c;
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-auth:hover {
+    background-color: #e31c5f;
+    transform: translateY(-1px);
+  }
+
+  .auth-card a {
+    color: #ff385c;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .auth-card a:hover {
+    color: #e31c5f;
+  }
+
+  p {
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 576px) {
+    .auth-container {
+      padding: 1.5rem;
+    }
+
+    .auth-card {
+      padding: 1.8rem;
+      border-radius: 0.8rem;
+    }
+
+    .auth-card h1 {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+
+<div class="auth-container">
+  <div class="auth-card">
+    <h1>Create an Account</h1>
+
+    <form action="/signup" method="post" class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input
+          type="text"
+          name="username"
+          id="username"
+          class="form-control"
+          placeholder="Enter your username"
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          class="form-control"
+          placeholder="Enter your email"
+          required
+        >
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          name="password"
+          id="password"
+          class="form-control"
+          placeholder="Create a password"
+          required
+        >
+      </div>
+
+      <button class="btn btn-auth">Sign Up</button>
+
+      <p class="text-center mt-3 mb-0">
+        Already have an account?
+        <a href="/login">Login</a>
+      </p>
+    </form>
+  </div>
+</div>

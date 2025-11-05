@@ -1,0 +1,266 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+  /* 🌍 Airbnb-style Filter Bar */
+  #filters-wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #filters {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center; /* ✅ centered on large screens */
+    gap: 1.2rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto; /* ✅ allows real scroll instead of transform */
+    scroll-behavior: smooth;
+  }
+
+  #filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter {
+    text-align: center;
+    opacity: 0.6;
+    color: #222;
+    transition: all 0.3s ease;
+    flex: 0 0 auto;
+    text-decoration: none !important;
+  }
+
+  .filter i {
+    font-size: 1.4rem;
+    display: block;
+  }
+
+  .filter p {
+    font-size: 0.8rem;
+    margin: 0.3rem 0 0;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    color: #fe424d;
+  }
+
+  .filter.active-filter {
+    opacity: 1 !important;
+    color: #fe424d;
+  }
+
+  /* ⏩ Scroll Buttons */
+  .scroll-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: opacity 0.3s ease;
+  }
+
+  .scroll-btn.left {
+    left: 0.3rem;
+  }
+
+  .scroll-btn.right {
+    right: 0.3rem;
+  }
+
+  .scroll-btn:hover {
+    background-color: #f3f3f3;
+  }
+
+  /* 🏡 Listings Grid */
+  .listing-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .listing-card {
+    border: none;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+  }
+
+  .listing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .listing-card img {
+    width: 100%;
+    height: 16rem;
+    object-fit: cover;
+    border-bottom: 1px solid #eee;
+  }
+
+  .card-body {
+    padding: 1rem 1.2rem;
+  }
+
+  .card-body p {
+    margin: 0.2rem 0;
+    color: #555;
+    font-size: 0.95rem;
+  }
+
+  .card-body b {
+    font-size: 1rem;
+    color: #111;
+  }
+
+  .price-info {
+    color: #111;
+    font-weight: 600;
+  }
+
+  /* ✨ Responsive Grid */
+  @media (max-width: 992px) {
+    .listing-card img {
+      height: 14rem;
+    }
+
+    #filters {
+      justify-content: flex-start; /* ✅ scroll start on small screens */
+    }
+  }
+
+  @media (max-width: 576px) {
+    .listing-card img {
+      height: 11rem;
+    }
+
+    .card-body {
+      padding: 0.8rem;
+    }
+
+    .card-body p {
+      font-size: 0.85rem;
+    }
+  }
+</style>
+
+<!-- ✅ Filter Section -->
+<div id="filters-wrapper">
+  <!-- Scroll Buttons -->
+  <div class="scroll-btn left" id="scrollLeft">
+    <i class="fa-solid fa-chevron-left"></i>
+  </div>
+  <div class="scroll-btn right" id="scrollRight">
+    <i class="fa-solid fa-chevron-right"></i>
+  </div>
+
+  <!-- ✅ Filter Bar -->
+  <div id="filters">
+    <a href="/listings?category=trending" class="filter <%= selectedCategory === 'trending' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-fire"></i><p>Trending</p>
+    </a>
+    <a href="/listings?category=rooms" class="filter <%= selectedCategory === 'rooms' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-bed"></i><p>Rooms</p>
+    </a>
+    <a href="/listings?category=iconic cities" class="filter <%= selectedCategory === 'iconic cities' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-mountain-city"></i><p>Iconic Cities</p>
+    </a>
+    <a href="/listings?category=mountain" class="filter <%= selectedCategory === 'mountain' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-mountain"></i><p>Mountain</p>
+    </a>
+    <a href="/listings?category=castles" class="filter <%= selectedCategory === 'castles' ? 'active-filter' : '' %>">
+      <i class="fa-brands fa-fort-awesome"></i><p>Castles</p>
+    </a>
+    <a href="/listings?category=arctic" class="filter <%= selectedCategory === 'arctic' ? 'active-filter' : '' %>">
+      <i class="fa-regular fa-snowflake"></i><p>Arctic</p>
+    </a>
+    <a href="/listings?category=camping" class="filter <%= selectedCategory === 'camping' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-campground"></i><p>Camping</p>
+    </a>
+    <a href="/listings?category=farms" class="filter <%= selectedCategory === 'farms' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-cow"></i><p>Farms</p>
+    </a>
+    <a href="/listings?category=doms" class="filter <%= selectedCategory === 'doms' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-igloo"></i><p>Doms</p>
+    </a>
+    <a href="/listings?category=boat" class="filter <%= selectedCategory === 'boat' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-ship"></i><p>Boat</p>
+    </a>
+    <a href="/listings?category=deserts" class="filter <%= selectedCategory === 'deserts' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-sun"></i><p>Deserts</p>
+    </a>
+    <a href="/listings" class="filter <%= selectedCategory === 'all' ? 'active-filter' : '' %>">
+      <i class="fa-solid fa-globe"></i><p>All</p>
+    </a>
+  </div>
+</div>
+
+<!-- ✅ Listings Grid -->
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-4">
+  <% for (const listing of allListing) { 
+      const nights = Math.floor(Math.random() * 4) + 2;
+      const startDay = Math.floor(Math.random() * 28) + 1;
+      const endDay = startDay + nights;
+      const month = new Date().toLocaleString('default', { month: 'short' });
+  %>
+    <a href="/listings/<%= listing._id %>" class="listing-link">
+      <div class="card listing-card">
+        <img 
+          src="<%= listing.image?.url || listing.image %>" 
+          alt="listing_image"
+        />
+        <div class="card-body">
+          <b><%= listing.title %></b><br />
+          <p><%= listing.location %>, <%= listing.country %></p>
+          <p><%= startDay %>–<%= endDay %> <%= month %> • <%= nights %> nights</p>
+          <span class="price-info">₹<%= listing.price.toLocaleString('en-IN') %> / night</span>
+        </div>
+      </div>
+    </a>
+  <% } %>
+</div>
+
+<script>
+  const filters = document.getElementById("filters");
+  const leftBtn = document.getElementById("scrollLeft");
+  const rightBtn = document.getElementById("scrollRight");
+
+  function updateScrollButtons() {
+    const maxScroll = filters.scrollWidth - filters.clientWidth;
+    if (maxScroll > 10) {
+      leftBtn.style.display = filters.scrollLeft > 10 ? "flex" : "none";
+      rightBtn.style.display =
+        filters.scrollLeft < maxScroll - 10 ? "flex" : "none";
+    } else {
+      leftBtn.style.display = "none";
+      rightBtn.style.display = "none";
+    }
+  }
+
+  rightBtn.addEventListener("click", () => {
+    filters.scrollBy({ left: 250, behavior: "smooth" });
+  });
+
+  leftBtn.addEventListener("click", () => {
+    filters.scrollBy({ left: -250, behavior: "smooth" });
+  });
+
+  filters.addEventListener("scroll", updateScrollButtons);
+  window.addEventListener("resize", updateScrollButtons);
+  window.addEventListener("load", updateScrollButtons);
+</script>
+
+
