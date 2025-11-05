@@ -14,14 +14,23 @@
 </footer>
 
 <style>
-  /* 🌈 Footer (matching navbar style) */
-  footer {
-    background-color: #fff; /* ✅ same as navbar */
-    padding: 1rem 0;
-    margin-top: 2rem;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.08); /* ✅ subtle top shadow */
-    border-top: 1px solid #eee;
-  }
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  padding: 1rem 0;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.08);
+  border-top: 1px solid #eee;
+  z-index: 1000;
+}
+
+/* 👇 ye add karna zaroori hai taaki content footer ke neeche na chhup jaye */
+body {
+  padding-bottom: 80px; /* footer ki height ke approx */
+}
+
 
   .f-info {
     display: flex;
@@ -78,4 +87,5 @@
       margin: 0 0.3rem;
     }
   }
+
 </style>
