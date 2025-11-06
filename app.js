@@ -94,6 +94,11 @@ app.use((req,res, next)=>{
   next();
 })
 
+// 🔹 Root route redirect
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 app.use('/listings',listingRouter);
 
 app.use('/listings/:id/reviews', reviewRouter )
@@ -112,10 +117,7 @@ app.use((err,req,res,next)=>{
 
 })
 
-// 🔹 Root route redirect
-app.get("/", (req, res) => {
-  res.redirect("/listings");
-});
+
 
 
 app.listen(3000,()=>{
