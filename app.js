@@ -3,8 +3,6 @@ if (process.env.NODE_ENV != "production") {
    require('dotenv').config();
 }
 
-
-
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
@@ -113,6 +111,12 @@ app.use((err,req,res,next)=>{
 
 
 })
+
+// 🔹 Root route redirect
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
 
 app.listen(3000,()=>{
     console.log('server is running ')

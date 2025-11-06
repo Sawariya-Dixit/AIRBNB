@@ -26,7 +26,7 @@ async function main() {
   }
 }
 
-// 🌱 Insert sample data
+// Insert sample data
 const initDB = async () => {
   try {
     await Listing.deleteMany({});
@@ -35,9 +35,9 @@ const initDB = async () => {
       owner: "690c2c9add0be0233378d916"  // valid user id
     }));
     await Listing.insertMany(initData.data);
-    console.log("🌱 Sample data initialized successfully!");
+    console.log(" Sample data initialized successfully!");
   } catch (err) {
-    console.log("❌ Error initializing data:", err);
+    console.log(" Error initializing data:", err);
   }
 };
 
