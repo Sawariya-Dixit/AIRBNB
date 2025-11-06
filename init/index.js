@@ -1,4 +1,14 @@
-require('dotenv').config();
+if (process.env.NODE_ENV !== "production") {
+  require('dotenv').config();
+  console.log("📦 MONGO_URL from env:", process.env.MONGO_URL);
+
+}
+console.log("📦 MONGO_URL from env:", process.env.MONGO_URL);
+
+
+
+
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listning.js");
@@ -24,7 +34,7 @@ const initDB = async () => {
     await Listing.deleteMany({});
     initData.data = initData.data.map((obj) => ({
       ...obj,
-      owner: "68ef5e4429f164debd5d3397"
+      owner: "690c2c9add0be0233378d916"
     }));
     await Listing.insertMany(initData.data);
     console.log("🌱 Sample data initialized successfully!");
@@ -36,3 +46,4 @@ const initDB = async () => {
 };
 
 initDB();
+
