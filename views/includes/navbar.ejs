@@ -1,7 +1,6 @@
 
-
 <style>
-  /* 🌈 Airbnb-Style Navbar */
+  /*  Airbnb-Style Navbar */
   .navbar {
     background-color: #ffffff !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
@@ -24,7 +23,7 @@
     color: #ff385c !important;
   }
 
-  /* 🔍 Search Bar */
+  /*  Search Bar */
   .search-inp {
     border: 1px solid #ddd;
     border-radius: 25px !important;
@@ -57,7 +56,7 @@
     background-color: #e31c5f;
   }
 
-  /* 🌐 Center Search Bar for screens > 768px */
+  /*  Center Search Bar for screens > 768px */
 @media (min-width: 769px) {
   .navbar-collapse {
     display: flex !important;
@@ -85,7 +84,7 @@
 }
 
 
-  /* 🧭 Responsive Adjustments */
+  /*  Responsive Adjustments */
   @media (max-width: 768px) {
     .search-inp {
       width: 100%;
@@ -113,7 +112,7 @@
 
 <nav class="navbar navbar-expand-md border-bottom sticky-top">
   <div class="container-fluid">
-    <!-- 🌍 Brand + Toggler -->
+    <!--  Brand + Toggler -->
     <a class="navbar-brand" href="/listings">
       <i class="fa-regular fa-compass fs-4"></i>
     </a>
@@ -130,14 +129,14 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- 🌐 Navbar Content -->
+    <!--  Navbar Content -->
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <!-- Left Links -->
       <div class="navbar-nav">
         <a class="nav-link" href="/listings">Wanderlust</a>
       </div>
 
-      <!-- 🔍 Center Search -->
+      <!--  Center Search -->
       <div class="mx-auto my-2 my-md-0">
         <form id="searchForm" action="/listings" method="GET" class="d-flex">
           <input
@@ -154,7 +153,7 @@
         </form>
       </div>
 
-      <!-- 👤 Right Auth Links -->
+      <!--  Right Auth Links -->
       <div class="navbar-nav ms-auto">
         <a class="nav-link" href="/listings/new">Airbnb your home</a>
         <% if (!currUser) { %>
@@ -169,7 +168,7 @@
 </nav>
 
 <script>
-  // 🚫 Prevent empty search
+  //  Prevent empty search
   const searchForm = document.getElementById("searchForm");
   const searchInput = document.getElementById("searchInput");
   searchForm.addEventListener("submit", (e) => {

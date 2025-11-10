@@ -71,7 +71,6 @@ app.use(express.urlencoded({extended:true}))
 
 
 
-
 main().then(()=>{console.log("connected succesfully")})
 .catch((err)=>{console.error(err)});
 async function main() {
@@ -94,7 +93,7 @@ app.use((req,res, next)=>{
   next();
 })
 
-// 🔹 Root route redirect
+// Root route redirect
 app.get("/", (req, res) => {
   res.redirect("/listings");
 });

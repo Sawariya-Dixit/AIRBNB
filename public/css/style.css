@@ -8,7 +8,7 @@ body {
   color: #222;
 }
 
-* 💳 Listing Cards */
+*  Listing Cards */
 .listing-card {
   border: none;
   margin-bottom: 2rem;
@@ -36,7 +36,7 @@ body {
   color: inherit;
 }
 
-/* 🏠 Buttons */
+/* Buttons */
 .add-btn,
 .edit-btn {
   background-color: #ff385c !important;
@@ -50,7 +50,7 @@ body {
   background-color: #e31c5f !important;
 }
 
-/* 🖼 Show Page */
+/*  Show Page */
 .show-img {
   height: 35vh;
   border-radius: 12px;

@@ -3,17 +3,17 @@ const { listingSchema } = require("../schema.js");
 const ExpressError = require("../utils/ExpressError.js");
 const { uploadToCloudinary } = require("../cloudConfig.js");
 
-// 🏠 INDEX route (with optional category + search filter)
+//  INDEX route (with optional category + search filter)
 module.exports.index = async (req, res) => {
   const { category, search } = req.query;
   let filter = {};
 
-  // 🎯 Category filter
+  //  Category filter
   if (category && category !== "all") {
     filter.category = category;
   }
 
-  // 🔍 Search filter (matches title, location, or country)
+  // Search filter (matches title, location, or country)
   if (search && search.trim() !== "") {
     const regex = new RegExp(search.trim(), "i");
     filter.$or = [{ title: regex }, { location: regex }, { country: regex }];
@@ -29,12 +29,12 @@ module.exports.index = async (req, res) => {
 };
 
 
-// ➕ NEW form
+// NEW form
 module.exports.renderNewForm = (req, res) => {
   res.render("listings/new.ejs");
 };
 
-// 👁 SHOW route
+//  SHOW route
 module.exports.showListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id)
@@ -49,7 +49,7 @@ module.exports.showListing = async (req, res) => {
   res.render("listings/show.ejs", { listing });
 };
 
-// 🧱 CREATE route
+// CREATE route
 module.exports.createListing = async (req, res, next) => {
   const { error } = listingSchema.validate(req.body);
   if (error)
@@ -58,7 +58,7 @@ module.exports.createListing = async (req, res, next) => {
   const newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
 
-  // 🖼 Upload image to Cloudinary if provided
+  //  Upload image to Cloudinary if provided
   if (req.file && req.file.buffer) {
     const result = await uploadToCloudinary(req.file.buffer);
     newListing.image = {
@@ -66,7 +66,7 @@ module.exports.createListing = async (req, res, next) => {
       filename: result.public_id,
     };
   } else {
-    // 🧩 Default Unsplash fallback
+    //  Default Unsplash fallback
     newListing.image = {
       url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=60",
       filename: "unsplash-default",
@@ -78,7 +78,7 @@ module.exports.createListing = async (req, res, next) => {
   res.redirect(`/listings/${newListing._id}`);
 };
 
-// ✏️ EDIT route
+// EDIT route
 module.exports.editListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -90,7 +90,7 @@ module.exports.editListing = async (req, res) => {
   const imgUrl = listing.image?.url || "";
   let originalImageUrl = imgUrl;
 
-  // 🔄 generate thumbnail preview
+  //  generate thumbnail preview
   if (imgUrl.includes("res.cloudinary.com")) {
     originalImageUrl = imgUrl.replace("/upload/", "/upload/h_250,w_300,c_fill,q_auto/");
   } else if (imgUrl.includes("images.unsplash.com")) {
@@ -101,7 +101,7 @@ module.exports.editListing = async (req, res) => {
   res.render("listings/edit.ejs", { listing, originalImageUrl });
 };
 
-// 🔧 UPDATE route
+//  UPDATE route
 module.exports.updateListing = async (req, res) => {
   const { id } = req.params;
   const listing = await Listing.findById(id);
@@ -126,7 +126,7 @@ module.exports.updateListing = async (req, res) => {
   res.redirect(`/listings/${id}`);
 };
 
-// 🗑 DELETE route
+// DELETE route
 module.exports.deleteListing = async (req, res) => {
   const { id } = req.params;
   await Listing.findByIdAndDelete(id);

@@ -2,7 +2,7 @@ const express = require("express");
 
 const router = express.Router();
 
-const wrapAsync = require("../utils/WrapAsync.js"); // ✅ added this
+const wrapAsync = require("../utils/WrapAsync.js"); // added this
 const ExpressError = require("../utils/ExpressError.js");
 const passport = require('passport');
 const { saveRedirectUrl } = require("../middelware.js");

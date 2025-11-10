@@ -14,13 +14,13 @@ async function main() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     });
-    console.log("✅ Connected to MongoDB Atlas");
+    console.log(" Connected to MongoDB Atlas");
 
     // Connection ready → now initialize DB
     await initDB();
 
   } catch (err) {
-    console.log("❌ MongoDB connection error:", err);
+    console.log("MongoDB connection error:", err);
   } finally {
     mongoose.connection.close();
   }
